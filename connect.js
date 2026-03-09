@@ -90,12 +90,14 @@ $('.board button').on('click', function(){
 
     var col = $(this).closest('td').index();
     var bottomAvail = checkBottom(col);
+    if(bottomAvail === undefined) return;
     changeColor(bottomAvail, col, currentColor);
 
     if(horizontalWinCheck() || verticalWinCheck() || diagonalWinCheck()){
         $('h1').text(currentName + " has won! Refresh your browser to play again!");
         $('h3').fadeOut('fast');
         $('h2').fadeOut('fast');
+        return;
     }
     currentPlayer = currentPlayer * -1;
 
