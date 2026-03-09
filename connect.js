@@ -79,3 +79,34 @@ function diagonalWinCheck(){
         }
     }
 }
+
+var currentPlayer = 1;
+var currentName = one;
+var currentColor = playerone;
+
+$('h3').text(one + ": it is your turn, please pick a column to drop your blue chip.");
+
+$('.board button').on('click', function(){
+
+    var col = $(this).closest('td').index();
+    var bottomAvail = checkBottom(col);
+    changeColor(bottomAvail, col, currentColor);
+
+    if(horizontalWinCheck() || verticalWinCheck() || diagonalWinCheck()){
+        $('h1').text(currentName + " has won! Refresh your browser to play again!");
+        $('h3').fadeOut('fast');
+        $('h2').fadeOut('fast');
+    }
+    currentPlayer = currentPlayer * -1;
+
+    if(currentPlayer === 1){
+        currentName = one;
+        $('h3').text(currentName + ": it is your turn, please pick a column to drop your blue chip.");
+        currentColor = playerone;
+    }
+    else{
+        currentName = two;
+         $('h3').text(currentName + ": it is your turn, please pick a column to drop your red chip.");
+        currentColor = playertwo;
+    }
+})
